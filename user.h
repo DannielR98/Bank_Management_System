@@ -21,6 +21,14 @@ public:
 
     // Function to display account information
     void displayAccountInfo();
+
+    const std::string& getAccountHolderName() const;
+
+    int getAccountNumber() const;
+
+    double getBalance() const;
+    void updateBalanceInDatabase(int accountNum, double newBalance);
+    void insertUserIntoDatabase(const User& user);
 };
 
 #endif // USER_H
