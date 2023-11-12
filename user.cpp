@@ -60,13 +60,13 @@ void User::insertUserIntoDatabase(const User& user) {
     sqlite3* db;
     int rc = sqlite3_open("bank.db", &db);
 
-    if (rc == 0) {
+    if (rc == SQLITE_OK) {
         std::stringstream query;
         query << "INSERT INTO Users (Name, AccountNumber, Balance) VALUES (?, ?, ?);";
         sqlite3_stmt* stmt;
         rc = sqlite3_prepare_v2(db, query.str().c_str(), -1, &stmt, nullptr);
 
-        if (rc == 0) {
+        if (rc == SQLITE_OK) {
             // Bind parameters
             sqlite3_bind_text(stmt, 1, user.getAccountHolderName().c_str(), -1, SQLITE_STATIC);
             sqlite3_bind_int(stmt, 2, user.getAccountNumber());
@@ -75,7 +75,7 @@ void User::insertUserIntoDatabase(const User& user) {
             // Execute the query
             rc = sqlite3_step(stmt);
 
-            if (rc != 101) {
+            if (rc != SQLITE_DONE) {
                 std::cerr << "Failed to insert user into the database: " << sqlite3_errmsg(db) << std::endl;
             }
 

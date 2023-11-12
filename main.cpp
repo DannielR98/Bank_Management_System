@@ -2,7 +2,7 @@
 #include "user.h"
 using namespace std;
 int main() {
-    User user("John Doe", 12345, 1000.0);
+    User user("John Doe1", 11432, 1000.0);
 
     // Display initial account information
     user.displayAccountInfo();
